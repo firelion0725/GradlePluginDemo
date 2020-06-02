@@ -1,0 +1,28 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    // gradle sdk
+    implementation gradleApi()
+    // groovy sdk
+    implementation localGroovy()
+//    implementation 'com.android.tools.build:gradle:4.0.0'
+}
+
+repositories{
+    mavenCentral()
+}
+
+//设置maven deployer
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //设置插件的GAV参数
+            pom.groupId = 'com.leo.plugin'
+            pom.artifactId = 'hello'
+            pom.version = '1.1.0'
+            //文件发布到下面目录
+            repository(url: uri('../repo'))
+        }
+    }
+}
